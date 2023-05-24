@@ -5,8 +5,8 @@ import (
 
     "github.com/gin-gonic/gin"
 
-    "contractors_backend/db/connect.go"
-    "models/Users"
+    "contractors_backend/db"
+    "contractors_backend/models"
     "github.com/joho/godotenv"
     "log"
 )
@@ -55,6 +55,8 @@ func getConstractorById(c *gin.Context) {
 
 func loadDatabase() {
     database.Connect()
+    database.Database.AutoMigrate(&model.User{})
+    database.Database.AutoMigrate(&model.Entry{})
 }
 
 func loadEnv() {
